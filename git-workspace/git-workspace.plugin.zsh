@@ -6,7 +6,7 @@ function ws() {
             _git_info $file
             popd >> /dev/null
         else
-            echo "$file"
+            echo "  $file"
         fi
     done
 }
