@@ -1,4 +1,4 @@
-function ws() {
+ws() {
     for file in $(ls); do
         if [ -d $file ]
         then
@@ -11,7 +11,8 @@ function ws() {
     done
 }
 
-function _git_info() {
+_git_info() {
+    local dirty
     if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
         echo -n "  $fg[white]$1"
         _print_spaces $1
@@ -23,7 +24,7 @@ function _git_info() {
         else
             echo -n "$fg[white]$bg[black] git $fg[black]$bg[green]$SEGMENT_SEPARATOR"
         fi
-        echo -n "$(git_prompt_info)$(git_prompt_status)"
+        echo -n `print -P -- "$(git_prompt_info)$(git_prompt_status)"`
         if [[ $dirty == $ZSH_THEME_GIT_PROMPT_DIRTY ]]; then
             print -P -- "  $fg[white]$bg[default]$SEGMENT_SEPARATOR%{$reset_color%}"
         else
@@ -35,7 +36,7 @@ function _git_info() {
     fi
 }
 
-function _print_spaces() {
+_print_spaces() {
     local len=$1
     ((len = 50 - ${#len}))
 
