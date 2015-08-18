@@ -2,9 +2,7 @@ ws() {
     for file in $(ls); do
         if [ -d $file ]
         then
-            pushd $file >> /dev/null
-            _git_info $file
-            popd >> /dev/null
+            (cd $file; _git_info $file)
         else
             echo "  $file"
         fi
@@ -20,7 +18,7 @@ _git_info() {
         if [[ $dirty == $ZSH_THEME_GIT_PROMPT_DIRTY ]]; then
             echo -n "$fg[white]$bg[black] git $fg[black]$bg[blue]$SEGMENT_SEPARATOR"
             echo -n "$fg[white]$bg[blue] $1 $fg[blue]$bg[white]$SEGMENT_SEPARATOR"
-            echo -n "$fg[blue]$bg[white]"
+            echo -n "$fg[black]$bg[white]"
         else
             echo -n "$fg[white]$bg[black] git $fg[black]$bg[green]$SEGMENT_SEPARATOR"
         fi
