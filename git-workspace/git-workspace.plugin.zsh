@@ -4,7 +4,7 @@ ws() {
         then
             (cd $file; _git_info $file)
         else
-            echo "  $file"
+            echo "  $fg[white]$file"
         fi
     done
 }
@@ -12,7 +12,7 @@ ws() {
 _git_info() {
     local dirty
     if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
-        echo -n "  $fg[white]$1"
+        echo -n "  $fg[white]$1/"
         _print_spaces $1
         dirty=$(parse_git_dirty)
         if [[ $dirty == $ZSH_THEME_GIT_PROMPT_DIRTY ]]; then
@@ -30,7 +30,7 @@ _git_info() {
         fi
         
     else
-        echo "  $fg[blue]$1"
+        echo "  $fg[blue]$1/"
     fi
 }
 
