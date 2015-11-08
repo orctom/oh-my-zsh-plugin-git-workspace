@@ -40,7 +40,7 @@ _print_spaces() {
 
     local spacing=""
     for i in {1..$len}; do
-        spacing="${spacing} "
+        spacing="${spacing}\U0020"
     done
     echo -n $fg[white]$spacing
 }
